@@ -62,5 +62,46 @@ namespace App3.ViewModels
 
             return data;
         }
+
+        public static string AddRecord(int age)
+        {
+            Console.WriteLine("Creating database, if it doesn't already exist");
+
+            SQLite.Net.Platform.XamarinAndroid.SQLitePlatformAndroid plat = new SQLite.Net.Platform.XamarinAndroid.SQLitePlatformAndroid();
+
+            string dbPath = Path.Combine(
+                     Environment.GetFolderPath(Environment.SpecialFolder.Personal),
+                     "ormdemo.db3");
+
+            var db = new SQLite.Net.SQLiteConnection(plat, dbPath);
+
+            //db.CreateTable<Stock>();
+
+            //if (db.Table<Stock>().Count() == 0)
+            {
+                // only insert the data if it doesn't already exist
+                var newStock = new Stock();
+                newStock.Symbol = "AAPL" + age.ToString();
+                db.Insert(newStock);
+                newStock = new Stock();
+                newStock.Symbol = "GOOG" + age.ToString();
+                db.Insert(newStock);
+                newStock = new Stock();
+                newStock.Symbol = "MSFT" + age.ToString();
+                db.Insert(newStock);
+            }
+            Console.WriteLine("Reading data");
+            var table = db.Table<Stock>();
+            string data = string.Empty;
+
+            foreach (var s in table)
+            {
+                Console.WriteLine(s.Id + " " + s.Symbol);
+
+                data += s.Id + " " + s.Symbol + " :: ";
+            }
+
+            return data;
+        }
     }
 }

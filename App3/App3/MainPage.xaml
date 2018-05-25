@@ -37,7 +37,10 @@
             <Entry x:Name="txtAge"  Text="" Placeholder="age here..."></Entry>
         </StackLayout>
 
-        <Button Text="Add" Clicked="Button_Clicked"></Button>
+        <Button Text="BasicAdd" Clicked="Button_Clicked"></Button>
+        
+        <Button Text="Add" Clicked="Button_Clicked_1"></Button>
+        
         <Label Text="" x:Name="Status"></Label>
     </StackLayout>
 </ContentPage>

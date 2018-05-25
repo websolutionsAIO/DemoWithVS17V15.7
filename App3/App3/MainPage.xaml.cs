@@ -23,7 +23,13 @@ namespace App3
             var abc = FirstVM.DoSomeDataAccess();
 
             Status.Text = abc;// txtName.Text + " - " + txtAge.Text;
+        }
 
+        private void Button_Clicked_1(object sender, EventArgs e)
+        {
+            string abc = FirstVM.AddRecord(int.Parse(txtAge.Text));
+
+            Status.Text = abc;// txtName.Text + " - " + txtAge.Text;
         }
     }
 }
