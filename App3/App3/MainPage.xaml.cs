@@ -13,5 +13,10 @@ namespace App3
 		{
 			InitializeComponent();
 		}
-	}
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Status.Text = txtName.Text + " - " + txtAge.Text;
+        }
+    }
 }

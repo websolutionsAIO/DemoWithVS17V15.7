@@ -3,9 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:App3"
              x:Class="App3.MainPage">
-
-	<Label Text="Welcome to Xamarin Forms!" 
+    <StackLayout>
+        <Label Text="Welcome to Xamarin Forms!" 
            VerticalOptions="Center" 
            HorizontalOptions="Center" />
+        
+        <Label Text="Status Here... - "></Label>
 
+        <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="0">
+            <Label x:Name="lbCo" 
+            Text="My Company"
+            Style="{DynamicResource LargeLabel}"/>
+
+            <Label x:Name="lbcopywrite" 
+            Text="©"
+            Margin="0,-7,0,0"
+            Style="{DynamicResource SmallLabel}"/>
+        </StackLayout>
+
+        <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="0">
+            <Label x:Name="lbName" 
+            Text="Name"
+            Style="{DynamicResource LargeLabel}"/>
+
+            <Entry x:Name="txtName" Text="" Placeholder="name here..."></Entry>
+        </StackLayout>
+
+        <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="0">
+            <Label x:Name="lbAge" 
+            Text="Age"
+            Style="{DynamicResource LargeLabel}"/>
+
+            <Entry x:Name="txtAge"  Text="" Placeholder="age here..."></Entry>
+        </StackLayout>
+
+        <Button Text="Add" Clicked="Button_Clicked"></Button>
+        <Label Text="" x:Name="Status"></Label>
+    </StackLayout>
 </ContentPage>
