@@ -12,6 +12,7 @@ using Google.Apis.Services;
 using System.Threading;
 using System.IO;
 using Google.Apis.Upload;
+using System.Reflection;
 
 namespace App3
 {
@@ -76,32 +77,59 @@ namespace App3
 
         private async Task Run()
         {
-            GoogleWebAuthorizationBroker.Folder = "Drive.Sample";
-            UserCredential credential;
-
-            string filename = "client_secrets.json";
-            filename = "client_secret_790001279756-k1fee1nrtqr60hvd6eihhra81eg4tqla.apps.googleusercontent.com.json";
-
-            using (var stream = new System.IO.FileStream(filename,
-                System.IO.FileMode.Open, System.IO.FileAccess.Read))
+            try
             {
-                credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
-                    GoogleClientSecrets.Load(stream).Secrets, Scopes, "user", CancellationToken.None);
+                GoogleWebAuthorizationBroker.Folder = "Drive.Sample";
+                UserCredential credential;
+
+                string filename = "client_secrets.json";
+                filename = "client_secret_790001279756-k1fee1nrtqr60hvd6eihhra81eg4tqla.apps.googleusercontent.com.json";
+
+                filename = Path.Combine(Environment.CurrentDirectory, @"client_secret_790001279756-k1fee1nrtqr60hvd6eihhra81eg4tqla.apps.googleusercontent.com.json");
+                filename = @"C:\Users\Lenovo\source\repos\App3\App3\App3\client_secret_790001279756-k1fee1nrtqr60hvd6eihhra81eg4tqla.apps.googleusercontent.com.json";
+
+                //var assembly = IntrospectionExtensions.GetTypeInfo(typeof(LoadResourceText)).Assembly;
+                //Stream stream = assembly.GetManifestResourceStream("WorkingWithFiles.PCLTextResource.txt");
+                //string text = "";
+                //using (var reader = new System.IO.StreamReader(stream))
+                //{
+                //    text = reader.ReadToEnd();
+                //}
+
+                //using (var stream = new System.IO.FileStream(filename,
+                //    System.IO.FileMode.Open, System.IO.FileAccess.Read))
+                //{
+                //    credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
+                //        GoogleClientSecrets.Load(stream).Secrets, Scopes, "user", CancellationToken.None);
+                //}
+
+                var assembly = IntrospectionExtensions.GetTypeInfo(typeof(MainPage)).Assembly;
+                //Stream stream = assembly.GetManifestResourceStream("App3.client_secret_790001279756-k1fee1nrtqr60hvd6eihhra81eg4tqla.apps.googleusercontent.com.json");
+
+                using (var stream = assembly.GetManifestResourceStream("App3.Droid.client_secret_790001279756-k1fee1nrtqr60hvd6eihhra81eg4tqla.apps.googleusercontent.com.json"))
+                {
+                    credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
+                        GoogleClientSecrets.Load(stream).Secrets, Scopes, "user", CancellationToken.None);
+                }
+
+                // Create the service.
+                var service = new DriveService(new BaseClientService.Initializer()
+                {
+                    HttpClientInitializer = credential,
+                    ApplicationName = "App3"// "Drive API Sample",
+                });
+
+                await UploadFileAsync(service);
+
+                //// uploaded succeeded
+                //Console.WriteLine("\"{0}\" was uploaded successfully", uploadedFile.Title);
+                //await DownloadFile(service, uploadedFile.DownloadUrl);
+                //await DeleteFile(service, uploadedFile);
             }
-
-            // Create the service.
-            var service = new DriveService(new BaseClientService.Initializer()
+            catch (Exception exp)
             {
-                HttpClientInitializer = credential,
-                ApplicationName = "App3"// "Drive API Sample",
-            });
-
-            await UploadFileAsync(service);
-
-            //// uploaded succeeded
-            //Console.WriteLine("\"{0}\" was uploaded successfully", uploadedFile.Title);
-            //await DownloadFile(service, uploadedFile.DownloadUrl);
-            //await DeleteFile(service, uploadedFile);
+                throw;
+            }
         }
 
         private Task<IUploadProgress> UploadFileAsync(DriveService service)

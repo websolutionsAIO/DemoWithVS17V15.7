@@ -33,6 +33,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)client_secrets.json" />
-    <Content Include="$(MSBuildThisFileDirectory)client_secret_790001279756-k1fee1nrtqr60hvd6eihhra81eg4tqla.apps.googleusercontent.com.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)client_secret_790001279756-k1fee1nrtqr60hvd6eihhra81eg4tqla.apps.googleusercontent.com.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
