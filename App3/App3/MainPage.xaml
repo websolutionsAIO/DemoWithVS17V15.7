@@ -42,5 +42,7 @@
         <Button Text="Add" Clicked="Button_Clicked_1"></Button>
         
         <Label Text="" x:Name="Status"></Label>
+
+        <Button Text="Push" Clicked="Button_Clicked_2"></Button>
     </StackLayout>
 </ContentPage>
