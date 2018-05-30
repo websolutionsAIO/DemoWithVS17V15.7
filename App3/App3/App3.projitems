@@ -33,8 +33,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)client_secrets.json" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\Sample Pictures\Chrysanthemum.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\Sample Pictures\Desert.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\Sample Pictures\Hydrangeas.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\Sample Pictures\Jellyfish.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\Sample Pictures\Koala.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\Sample Pictures\Lighthouse.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\Sample Pictures\Penguins.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\Sample Pictures\Tulips.jpg" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)client_secret_790001279756-k1fee1nrtqr60hvd6eihhra81eg4tqla.apps.googleusercontent.com.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Page1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Page2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:App3"
              x:Class="App3.MainPage">
-    <StackLayout>
+    <!--<StackLayout>
         <Label Text="Welcome to Xamarin Forms!" 
            VerticalOptions="Center" 
            HorizontalOptions="Center" />
@@ -44,5 +44,35 @@
         <Label Text="" x:Name="Status"></Label>
 
         <Button Text="Push" Clicked="Button_Clicked_2"></Button>
-    </StackLayout>
+
+        
+    </StackLayout>-->
+    
+    <!--<StackLayout Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center">
+    <Entry x:Name="txtname" Placeholder="enter ur name here"></Entry>
+    <Button x:Name="btnhitme" Text="hit me" Clicked="btnhitme_Clicked"></Button>
+    </StackLayout>-->
+
+    <!--<StackLayout Grid.Row="1">
+    </StackLayout>-->
+
+    <ContentPage.Content>
+        <ScrollView x:Name="sv1" HeightRequest="300" WidthRequest="200">
+            <StackLayout>
+                <!--<BoxView BackgroundColor="Red" HeightRequest="600" WidthRequest="150" />-->
+                <Entry x:Name="txtnm" Placeholder="enter ur name"></Entry>
+                <Label x:Name="lblnm" ></Label>
+                <Button x:Name="btnnm" Text="hello click me" Clicked="btnnm_Clicked"></Button>
+                <DatePicker x:Name="dtnm" BackgroundColor="Beige" DateSelected="dtnm_DateSelected"></DatePicker>
+                <TimePicker x:Name="dttime" BackgroundColor="Azure" PropertyChanged="dttime_PropertyChanged"></TimePicker>
+
+                <!--<Image x:Name="img1"  Source="C:\Users\Lenovo\source\repos\App3_2\App3\App3\resources\Sample Pictures\Desert.jpg" ></Image>-->
+
+                <Image x:Name="imgonline" MinimumHeightRequest="400" MinimumWidthRequest="200" Source="http://media.gettyimages.com/photos/colorful-cosmos-flowers-picture-id157190551"></Image>
+
+                <ListView x:Name="lvfoodlist"></ListView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+
 </ContentPage>

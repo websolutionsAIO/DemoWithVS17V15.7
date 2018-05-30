@@ -23,148 +23,203 @@ namespace App3
 			InitializeComponent();
 		}
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private void btnnm_Clicked(object sender, EventArgs e)
         {
-            Status.Text = txtName.Text + " - " + txtAge.Text;
+            lblnm.Text = txtnm.Text;
+            DisplayAlert("test", "Hello " + txtnm.Text + "!", "cancel");
 
-            var abc = FirstVM.DoSomeDataAccess();
+            lvfoodlist.ItemsSource= new string[]{
+  "mono",
+  "monodroid",
+  "monotouch",
+  "monorail",
+  "monodevelop",
+  "monotone",
+  "monopoly",
+  "monomodal",
+  "mononucleosis"
+};
+            //lvfoodlist.ItemsSource.Add("monochrome");
 
-            Status.Text = abc;// txtName.Text + " - " + txtAge.Text;
+
         }
 
-        private void Button_Clicked_1(object sender, EventArgs e)
+        private void dtnm_DateSelected(object sender, DateChangedEventArgs e)
         {
-            string abc = FirstVM.AddRecord(int.Parse(txtAge.Text));
+            lblnm.Text = dtnm.Date.ToShortDateString();
 
-            Status.Text = abc;// txtName.Text + " - " + txtAge.Text;
         }
 
-        //private void push()
+        //private void dttime_PropertyChanging(object sender, PropertyChangingEventArgs e)
         //{
-        //    GoogleWebAuthorizationBroker.Folder = "Drive.Sample";
-        //    UserCredential credential;
-        //    using (var stream = new System.IO.FileStream("client_secrets.json",
-        //        System.IO.FileMode.Open, System.IO.FileAccess.Read))
-        //    {
-        //        credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
-        //            GoogleClientSecrets.Load(stream).Secrets, Scopes, "user", CancellationToken.None);
-        //    }
-
-        //    // Create the service.
-        //    var service = new DriveService(new BaseClientService.Initializer()
-        //    {
-        //        HttpClientInitializer = credential,
-        //        ApplicationName = "Drive API Sample",
-        //    });
-
-        //    await UploadFileAsync(service);
+            
         //}
 
-        // CHANGE THIS if you upload a file type other than a jpg
-        private const string ContentType = @"application/x-sqlite3";
-
-        // <summary>The Drive API scopes.</summary>
-        private static readonly string[] Scopes = new[] { DriveService.Scope.DriveFile, DriveService.Scope.Drive };
-
-        private string dbPath = Path.Combine(
-                     Environment.GetFolderPath(Environment.SpecialFolder.Personal),
-                     "ormdemo.db3");
-
-        private void Button_Clicked_2(object sender, EventArgs e)
+        private void dttime_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Run();
-        }
-
-        private async Task Run()
-        {
-            try
+            if (dttime != null && dttime.Time!=null)
             {
-                GoogleWebAuthorizationBroker.Folder = "Drive.Sample";
-                UserCredential credential;
-
-                string filename = "client_secrets.json";
-                filename = "client_secret_790001279756-k1fee1nrtqr60hvd6eihhra81eg4tqla.apps.googleusercontent.com.json";
-
-                filename = Path.Combine(Environment.CurrentDirectory, @"client_secret_790001279756-k1fee1nrtqr60hvd6eihhra81eg4tqla.apps.googleusercontent.com.json");
-                filename = @"C:\Users\Lenovo\source\repos\App3\App3\App3\client_secret_790001279756-k1fee1nrtqr60hvd6eihhra81eg4tqla.apps.googleusercontent.com.json";
-
-                //var assembly = IntrospectionExtensions.GetTypeInfo(typeof(LoadResourceText)).Assembly;
-                //Stream stream = assembly.GetManifestResourceStream("WorkingWithFiles.PCLTextResource.txt");
-                //string text = "";
-                //using (var reader = new System.IO.StreamReader(stream))
-                //{
-                //    text = reader.ReadToEnd();
-                //}
-
-                //using (var stream = new System.IO.FileStream(filename,
-                //    System.IO.FileMode.Open, System.IO.FileAccess.Read))
-                //{
-                //    credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
-                //        GoogleClientSecrets.Load(stream).Secrets, Scopes, "user", CancellationToken.None);
-                //}
-
-                var assembly = IntrospectionExtensions.GetTypeInfo(typeof(MainPage)).Assembly;
-                //Stream stream = assembly.GetManifestResourceStream("App3.client_secret_790001279756-k1fee1nrtqr60hvd6eihhra81eg4tqla.apps.googleusercontent.com.json");
-
-                using (var stream = assembly.GetManifestResourceStream("App3.Droid.client_secret_790001279756-k1fee1nrtqr60hvd6eihhra81eg4tqla.apps.googleusercontent.com.json"))
-                {
-                    credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
-                        GoogleClientSecrets.Load(stream).Secrets, Scopes, "user", CancellationToken.None);
-                }
-
-                // Create the service.
-                var service = new DriveService(new BaseClientService.Initializer()
-                {
-                    HttpClientInitializer = credential,
-                    ApplicationName = "App3"// "Drive API Sample",
-                });
-
-                await UploadFileAsync(service);
-
-                //// uploaded succeeded
-                //Console.WriteLine("\"{0}\" was uploaded successfully", uploadedFile.Title);
-                //await DownloadFile(service, uploadedFile.DownloadUrl);
-                //await DeleteFile(service, uploadedFile);
-            }
-            catch (Exception exp)
-            {
-                throw;
+                lblnm.Text = dttime.Time.ToString();
             }
         }
 
-        private Task<IUploadProgress> UploadFileAsync(DriveService service)
-        {
-            var title = dbPath;// "ormdemo.db3";
-            if (title.LastIndexOf('\\') != -1)
-            {
-                title = title.Substring(title.LastIndexOf('\\') + 1);
-            }
+        //private void btnhitme_Clicked(object sender, EventArgs e)
+        //{
+        //    //txtname.Text
+        //    DisplayAlert("test", "Hello " + txtname.Text + "!", "cancel");
+        //}
 
-            var uploadStream = new System.IO.FileStream(dbPath, System.IO.FileMode.Open,
-                System.IO.FileAccess.Read);
 
-            var insert = service.Files.Insert(new Google.Apis.Drive.v2.Data.File { Title = title }, uploadStream, ContentType);
 
-            insert.ChunkSize = FilesResource.InsertMediaUpload.MinimumChunkSize * 2;
-            //insert.ProgressChanged += Upload_ProgressChanged;
-            //insert.ResponseReceived += Upload_ResponseReceived;
+        //=======================================================
 
-            var task = insert.UploadAsync();
+        //private void Button_Clicked(object sender, EventArgs e)
+        //{
+        //    Status.Text = txtName.Text + " - " + txtAge.Text;
 
-            task.ContinueWith(t =>
-            {
-                // NotOnRanToCompletion - this code will be called if the upload fails
-                Console.WriteLine("Upload Failed. " + t.Exception);
-            }, TaskContinuationOptions.NotOnRanToCompletion);
-            task.ContinueWith(t =>
-            {
-                //Logger.Debug("Closing the stream");
-                uploadStream.Dispose();
-                //Logger.Debug("The stream was closed");
-            });
+        //    var abc = FirstVM.DoSomeDataAccess();
 
-            return task;
-        }
+        //    Status.Text = abc;// txtName.Text + " - " + txtAge.Text;
+        //}
+
+        //private void Button_Clicked_1(object sender, EventArgs e)
+        //{
+        //    string abc = FirstVM.AddRecord(int.Parse(txtAge.Text));
+
+        //    Status.Text = abc;// txtName.Text + " - " + txtAge.Text;
+        //}
+
+        ////private void push()
+        ////{
+        ////    GoogleWebAuthorizationBroker.Folder = "Drive.Sample";
+        ////    UserCredential credential;
+        ////    using (var stream = new System.IO.FileStream("client_secrets.json",
+        ////        System.IO.FileMode.Open, System.IO.FileAccess.Read))
+        ////    {
+        ////        credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
+        ////            GoogleClientSecrets.Load(stream).Secrets, Scopes, "user", CancellationToken.None);
+        ////    }
+
+        ////    // Create the service.
+        ////    var service = new DriveService(new BaseClientService.Initializer()
+        ////    {
+        ////        HttpClientInitializer = credential,
+        ////        ApplicationName = "Drive API Sample",
+        ////    });
+
+        ////    await UploadFileAsync(service);
+        ////}
+
+        //// CHANGE THIS if you upload a file type other than a jpg
+        //private const string ContentType = @"application/x-sqlite3";
+
+        //// <summary>The Drive API scopes.</summary>
+        //private static readonly string[] Scopes = new[] { DriveService.Scope.DriveFile, DriveService.Scope.Drive };
+
+        //private string dbPath = Path.Combine(
+        //             Environment.GetFolderPath(Environment.SpecialFolder.Personal),
+        //             "ormdemo.db3");
+
+        //private void Button_Clicked_2(object sender, EventArgs e)
+        //{
+        //    Run();
+        //}
+
+        //private async Task Run()
+        //{
+        //    try
+        //    {
+        //        GoogleWebAuthorizationBroker.Folder = "Drive.Sample";
+        //        UserCredential credential;
+
+        //        string filename = "client_secrets.json";
+        //        filename = "client_secret_790001279756-k1fee1nrtqr60hvd6eihhra81eg4tqla.apps.googleusercontent.com.json";
+
+        //        filename = Path.Combine(Environment.CurrentDirectory, @"client_secret_790001279756-k1fee1nrtqr60hvd6eihhra81eg4tqla.apps.googleusercontent.com.json");
+        //        filename = @"C:\Users\Lenovo\source\repos\App3\App3\App3\client_secret_790001279756-k1fee1nrtqr60hvd6eihhra81eg4tqla.apps.googleusercontent.com.json";
+
+        //        //var assembly = IntrospectionExtensions.GetTypeInfo(typeof(LoadResourceText)).Assembly;
+        //        //Stream stream = assembly.GetManifestResourceStream("WorkingWithFiles.PCLTextResource.txt");
+        //        //string text = "";
+        //        //using (var reader = new System.IO.StreamReader(stream))
+        //        //{
+        //        //    text = reader.ReadToEnd();
+        //        //}
+
+        //        //using (var stream = new System.IO.FileStream(filename,
+        //        //    System.IO.FileMode.Open, System.IO.FileAccess.Read))
+        //        //{
+        //        //    credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
+        //        //        GoogleClientSecrets.Load(stream).Secrets, Scopes, "user", CancellationToken.None);
+        //        //}
+
+        //        var assembly = IntrospectionExtensions.GetTypeInfo(typeof(MainPage)).Assembly;
+        //        //Stream stream = assembly.GetManifestResourceStream("App3.client_secret_790001279756-k1fee1nrtqr60hvd6eihhra81eg4tqla.apps.googleusercontent.com.json");
+
+        //        using (var stream = assembly.GetManifestResourceStream("App3.Droid.client_secret_790001279756-k1fee1nrtqr60hvd6eihhra81eg4tqla.apps.googleusercontent.com.json"))
+        //        {
+        //            credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
+        //                GoogleClientSecrets.Load(stream).Secrets, Scopes, "user", CancellationToken.None);
+        //        }
+
+        //        // Create the service.
+        //        var service = new DriveService(new BaseClientService.Initializer()
+        //        {
+        //            HttpClientInitializer = credential,
+        //            ApplicationName = "App3"// "Drive API Sample",
+        //        });
+
+        //        await UploadFileAsync(service);
+
+        //        //// uploaded succeeded
+        //        //Console.WriteLine("\"{0}\" was uploaded successfully", uploadedFile.Title);
+        //        //await DownloadFile(service, uploadedFile.DownloadUrl);
+        //        //await DeleteFile(service, uploadedFile);
+        //    }
+        //    catch (Exception exp)
+        //    {
+        //        throw;
+        //    }
+        //}
+
+        //private Task<IUploadProgress> UploadFileAsync(DriveService service)
+        //{
+        //    var title = dbPath;// "ormdemo.db3";
+        //    if (title.LastIndexOf('\\') != -1)
+        //    {
+        //        title = title.Substring(title.LastIndexOf('\\') + 1);
+        //    }
+
+        //    var uploadStream = new System.IO.FileStream(dbPath, System.IO.FileMode.Open,
+        //        System.IO.FileAccess.Read);
+
+        //    var insert = service.Files.Insert(new Google.Apis.Drive.v2.Data.File { Title = title }, uploadStream, ContentType);
+
+        //    insert.ChunkSize = FilesResource.InsertMediaUpload.MinimumChunkSize * 2;
+        //    //insert.ProgressChanged += Upload_ProgressChanged;
+        //    //insert.ResponseReceived += Upload_ResponseReceived;
+
+        //    var task = insert.UploadAsync();
+
+        //    task.ContinueWith(t =>
+        //    {
+        //        // NotOnRanToCompletion - this code will be called if the upload fails
+        //        Console.WriteLine("Upload Failed. " + t.Exception);
+        //    }, TaskContinuationOptions.NotOnRanToCompletion);
+        //    task.ContinueWith(t =>
+        //    {
+        //        //Logger.Debug("Closing the stream");
+        //        uploadStream.Dispose();
+        //        //Logger.Debug("The stream was closed");
+        //    });
+
+        //    return task;
+        //}
+
+
+
+
+
 
     }
 }
