@@ -16,6 +16,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Models\Stock.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Student.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FirstVM.cs" />
   </ItemGroup>
   <ItemGroup>

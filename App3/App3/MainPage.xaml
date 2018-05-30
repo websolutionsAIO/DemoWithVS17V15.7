@@ -55,10 +55,34 @@
 
     <!--<StackLayout Grid.Row="1">
     </StackLayout>-->
-
+    
     <ContentPage.Content>
-        <ScrollView x:Name="sv1" HeightRequest="300" WidthRequest="200">
+        <ScrollView x:Name="sv1" HeightRequest="100" WidthRequest="200">
             <StackLayout>
+
+                <ListView x:Name="lvStudentList">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <!--<TextCell Text="{Binding FirstName}" />-->
+                            <ViewCell>
+                                <StackLayout BackgroundColor="#eee"
+						Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Image WidthRequest="100" HeightRequest="100"  Source="http://cdn.touropia.com/gfx/d/most-famous-bridges-in-the-world/akashi_kaikyo_bridge.jpg?v=1"></Image>
+                                        <Image Source="{Binding ImageUrl}" WidthRequest="100" HeightRequest="100" MinimumHeightRequest="50" MinimumWidthRequest="50" />
+                                        <Label Text="{Binding FirstName}"
+								TextColor="#f35e20" />
+                                        <Label Text="{Binding Age}"
+								HorizontalOptions="EndAndExpand"
+								TextColor="#503026" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button x:Name="btnShowStudents" Text="Show Students" Clicked="btnShowStudents_Clicked"></Button>
+
                 <!--<BoxView BackgroundColor="Red" HeightRequest="600" WidthRequest="150" />-->
                 <Entry x:Name="txtnm" Placeholder="enter ur name"></Entry>
                 <Label x:Name="lblnm" ></Label>
@@ -67,10 +91,10 @@
                 <TimePicker x:Name="dttime" BackgroundColor="Azure" PropertyChanged="dttime_PropertyChanged"></TimePicker>
 
                 <!--<Image x:Name="img1"  Source="C:\Users\Lenovo\source\repos\App3_2\App3\App3\resources\Sample Pictures\Desert.jpg" ></Image>-->
-
                 <Image x:Name="imgonline" MinimumHeightRequest="400" MinimumWidthRequest="200" Source="http://media.gettyimages.com/photos/colorful-cosmos-flowers-picture-id157190551"></Image>
 
                 <ListView x:Name="lvfoodlist"></ListView>
+
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

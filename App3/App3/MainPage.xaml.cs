@@ -13,6 +13,7 @@ using System.Threading;
 using System.IO;
 using Google.Apis.Upload;
 using System.Reflection;
+using App3.Models;
 
 namespace App3
 {
@@ -62,6 +63,13 @@ namespace App3
                 lblnm.Text = dttime.Time.ToString();
             }
         }
+
+        private void btnShowStudents_Clicked(object sender, EventArgs e)
+        {
+            lvStudentList.ItemsSource = Student.GetStudent();
+        }
+
+        #region unused code
 
         //private void btnhitme_Clicked(object sender, EventArgs e)
         //{
@@ -216,9 +224,7 @@ namespace App3
         //    return task;
         //}
 
-
-
-
+        #endregion
 
 
     }
